@@ -43,12 +43,16 @@ const TopNavbar = () => {
         localStorage.clear()
     }
 
+    const onProfileClick = () => {
+        router.push('/orders');
+    }
+
     return (
         <Navbar bg="dark" variant="dark">
             <NavbarBrand href='/' style={{ marginLeft: '10px' }}>Eustakwiat</NavbarBrand>
             <Nav className="ml-auto">
                 <NavLink href="/">Home</NavLink>
-                <NavLink href="/products">Products</NavLink>
+                <NavLink href="/">Products</NavLink>
                 <NavLink href="/about">About</NavLink>
                 <NavLink href="/contact">Contact</NavLink>
             </Nav>
@@ -65,6 +69,7 @@ const TopNavbar = () => {
                         Zaloguj
                     </Button>
                 )}
+                <Button variant='success' style={{ width: '100px', marginRight: '15px' }} onClick={onProfileClick}>Profil</Button>
                 <Button variant='info' style={{ width: '100px', marginRight: '15px' }} onClick={onClear}>Clear</Button>
 
             </div>

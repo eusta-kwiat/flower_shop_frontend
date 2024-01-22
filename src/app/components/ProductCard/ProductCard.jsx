@@ -57,10 +57,10 @@ const ProductCard = ({ product }) => {
       />
       <Card.Body>
         <Card.Title>
-          <a href="/chuj" style={{textDecoration: 'none', color: 'black'}}>{product.name}</a>
+          <a href="/product_with_id" style={{textDecoration: 'none', color: 'black'}}>{product.name}</a>
         </Card.Title>
         <Card.Text>
-          Price: ${product.price}
+          Cena: {product.price}zł
         </Card.Text>
         <div>
           {isInCart ? (

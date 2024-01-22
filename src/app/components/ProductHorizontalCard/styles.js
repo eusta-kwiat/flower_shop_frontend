@@ -5,7 +5,7 @@ export const RowDiv = styled.div`
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    width: 60%;
+    width: 100%;
     height: 100px;
     margin: 10px;
     border: 1px solid rgba(0, 0, 0, 0.5);

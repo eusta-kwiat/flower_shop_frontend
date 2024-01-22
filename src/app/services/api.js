@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const apiURL = 'http://127.0.0.1:8000/api/';
+
 const api = axios.create({
     baseURL: 'http://127.0.0.1:8000/',
     headers: {
@@ -53,3 +55,42 @@ export const getProducts = async () => {
         throw error;
     }
 };
+
+const getHeaders = () => {
+    const authToken = localStorage.getItem('access');
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + authToken,
+    };
+    return headers;
+}
+
+export const getDiscounts = async (cart) => {
+    const headers = getHeaders();
+
+    const itemsQuantity = cart.map(item => ({
+        id: item.product.product_id,
+        quantity: item.quantity,
+    }));
+
+    const body = {
+        discount_code: '',
+        products: itemsQuantity
+    };
+
+    console.log(body);
+
+    return axios.post(apiURL + 'check_discount/', { body }, { headers });
+}
+
+export const getUserOrders = () => {
+    const headers = getHeaders();
+
+    return axios.get(apiURL + 'client/orders/', {headers});
+}
+
+export const getOrderDetails = (orderId) => {
+    const headers = getHeaders();
+
+    return axios.get(apiURL + 'client/orders/' + orderId + '/', {headers});
+}

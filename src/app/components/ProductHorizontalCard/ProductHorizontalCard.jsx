@@ -54,6 +54,7 @@ const ProductHorizontalCard = ({ product }) => {
       <div>
             <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
               <div>
+              <span style={{ margin: '0 10px' }}>{product.price} zł</span>
                 <Button variant="primary" onClick={onDecreaseClick} style={{margin: '10px'}}>-</Button>
                 <span style={{ margin: '0 10px' }}>{quantity}</span>
                 <Button variant="primary" onClick={onIncreaseClick} style={{margin: '10px'}}>+</Button>

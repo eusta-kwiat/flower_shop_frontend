@@ -25,7 +25,6 @@ export const initializeCart = () => {
 }
 
 export const addToCart = (product, quantity) => {
-    console.log('addToCart', product, quantity);
     const cart = JSON.parse(localStorage.getItem("cart"));
     const existingItemIndex = cart.findIndex(item => item.product.id === product.id);
     if (existingItemIndex !== -1) {
@@ -36,17 +35,25 @@ export const addToCart = (product, quantity) => {
         }
     }
     localStorage.setItem('cart', JSON.stringify(cart));
-    console.log(localStorage);
 }
 
 export const removeItem = (product) => {
-    console.log('removeItem', product);
     const cart = JSON.parse(localStorage.getItem('cart'));
     const existingItemIndex = cart.findIndex(item => item.product. id === product.id);
     if (existingItemIndex >= 0 && existingItemIndex < cart.length) {
         cart.splice(existingItemIndex, 1);
     }
     localStorage.setItem('cart', JSON.stringify(cart));
-    console.log(localStorage);
+}
+
+export const getTotalPrice = (cart) => {
+    if (!cart)
+        return 0;
+    let totalPrice = 0;
+    cart.forEach(item => {
+        const productPrice = parseFloat(item.product.price);
+        totalPrice += productPrice * item.quantity;
+    })
+    return totalPrice;
 }
 
