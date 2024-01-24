@@ -57,3 +57,9 @@ export const getTotalPrice = (cart) => {
     return totalPrice;
 }
 
+export const transformCartToOrder = (cart) => {
+    return cart.map(item => ({
+        id: item.product.product_id,
+        quantity: item.quantity,
+    }));
+}

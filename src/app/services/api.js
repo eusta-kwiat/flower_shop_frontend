@@ -65,7 +65,7 @@ const getHeaders = () => {
     return headers;
 }
 
-export const getDiscounts = async (cart) => {
+export const getDiscounts = async (cart, discount_code) => {
     const headers = getHeaders();
 
     const itemsQuantity = cart.map(item => ({
@@ -74,13 +74,13 @@ export const getDiscounts = async (cart) => {
     }));
 
     const body = {
-        discount_code: '',
+        discount_code: discount_code,
         products: itemsQuantity
     };
 
     console.log(body);
 
-    return axios.post(apiURL + 'check_discount/', { body }, { headers });
+    return axios.post(apiURL + 'check_discount/', body , { headers });
 }
 
 export const getUserOrders = () => {
@@ -94,3 +94,9 @@ export const getOrderDetails = (orderId) => {
 
     return axios.get(apiURL + 'client/orders/' + orderId + '/', {headers});
 }
+
+export const placeOrder = (body) => {
+    const headers = getHeaders();
+
+    return axios.post(apiURL + 'place_order/', body, {headers});
+};

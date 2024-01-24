@@ -5,9 +5,6 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { getUserOrders } from '../services/api';
 
-
-
-
 export default function Orders () {
     const [orderList, setOrderList] = useState([]);
     const router = useRouter();
@@ -33,9 +30,8 @@ export default function Orders () {
                         <th>Nr zamówienia</th>
                         <th>Data</th>
                         <th>Czas</th>
-                        <th>Płatność</th>
+                        <th>Status zamówienia</th>
                         <th>Cena</th>
-                        <th>Adres</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,9 +40,8 @@ export default function Orders () {
                             <td>{ order.id }</td>
                             <td>{ order.creation_date }</td>
                             <td>{ order.creation_time }</td>
-                            <td>{ order.payment }</td>
-                            <td>{ order.cost }</td>
-                            <td>{ order.address.city } { order.address.apartmentNumber }</td>
+                            <td>{ order.orderStatus.name }</td>
+                            <td>{ parseFloat(order.cost).toFixed(2) }zł</td>
                         </tr>
                     ))}
                 </tbody>
