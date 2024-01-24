@@ -18,6 +18,7 @@ const ProductList = () => {
         const productsData = await getProducts();
         setProducts(productsData);
         setFilteredProducts(productsData);
+        console.log(productsData)
       } catch (error) {
         console.error('Error fetching product data:', error);
       }
@@ -38,7 +39,6 @@ const ProductList = () => {
       filteredResult = filteredResult.filter(
         (product) => parseFloat(product.price) >= parseFloat(filterParams.minPrice)
       );
-      console.log(filteredProducts);
     }
 
     if (filterParams.maxPrice !== '') {

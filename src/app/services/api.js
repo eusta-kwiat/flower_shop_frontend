@@ -56,6 +56,10 @@ export const getProducts = async () => {
     }
 };
 
+export const getProductById = (id) => {
+    return axios.get(apiURL + 'products/');
+};
+
 const getHeaders = () => {
     const authToken = localStorage.getItem('access');
     const headers = {

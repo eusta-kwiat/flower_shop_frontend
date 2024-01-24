@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { addToCart, removeItem } from '@/app/services/cart';
+import Link from 'next/link';
 
 const ProductCard = ({ product }) => {
   const [isInCart, setIsInCart] = useState(false);
@@ -48,7 +49,8 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <Card style={{ width: '15rem' , margin: '1rem'}}>
+    <Link href={`/products/${product.product_id}`} passHref>
+    <Card style={{ width: '15rem' , margin: '1rem'}} href={'/products/' + product.product_id}>
       <Card.Img
         variant="top"
         src={product.img}
@@ -79,6 +81,7 @@ const ProductCard = ({ product }) => {
 
       </Card.Body>
     </Card>
+    </Link>
   );
 };
 
