@@ -58,6 +58,7 @@ export default function Cart() {
     const [discountMsg, setDiscountMsg] = useState("");
     const [useDefaultAddress, setUseDefaultAddress] = useState(false);
     const [formMsg, setFormMsg] = useState("");
+    const [discountStyle, setDiscountStyle] = useState('');
 
     useEffect(() => {
         const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -77,10 +78,12 @@ export default function Cart() {
             .then((res) => {
                 console.log(res.data);
                 setDiscountMsg('Uzyto kodu. Nowa cena: ' + res.data.price.toFixed(2) + 'zł');
+                setDiscountStyle('text-success');
             })
             .catch((err) => {
                 console.log(err);
                 setDiscountMsg('Nieprawidłowy kod');
+                setDiscountStyle('text-danger');
             })
     }
 
@@ -146,17 +149,18 @@ export default function Cart() {
         </Container>
       );
 
-    return (
-        <>
-            <DoubleDiv>
-                <div styles={{flex: 1, marginLeft: '20px'}}>
+      return (
+        <Container className="mt-5">
+            <Row>
+                <Col xs={12} lg={8}>
                     {cart.map(element => (
                         <ProductHorizontalCard key={element.product.id} product={element.product} onCartChange={setCart} />
                     ))}
-                    <p style={{margin: '10px'}}>Cena całkowita: {totalPrice.toFixed(2)}zł</p>
-                </div>
-                <div style={{ flex: 1, margin: '0 50px 0 50px' }}>
-                    <Form>
+                    <p className="mt-3">Cena całkowita: {totalPrice.toFixed(2)}zł</p>
+                </Col>
+                <Col xs={12} lg={4}>
+                    <Form style={{height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-end', paddingBottom: '100px'}}>
+                        
                         <Form.Group className='mb-3' controlId='formPromoCode'>
                             <Form.Label>Wprowadź kod promocyjny</Form.Label>
                             <Form.Control
@@ -166,22 +170,20 @@ export default function Cart() {
                             />
                         </Form.Group>
                         <Button variant='primary' onClick={onPromoCodeClick}>
-                            Zastostuj
+                            Zastosuj
                         </Button>
-                        {discountMsg && <p>{discountMsg}</p>}
+                        {discountMsg && <p className={"mt-2 " + discountStyle}>{discountMsg}</p>}
                     </Form>
-                </div>
-            </DoubleDiv>
-            <div style={{display: 'flex', justifyContent: 'flex-end', margin: '5px 5vw'}}>
-                {cart.length > 0 && <Button variant='success'>Kontynuuj</Button>}
-            </div>
+                </Col>
+            </Row>
 
-            {/* order form */}
-            <Form style={{margin: '20px'}} onSubmit={handleSubmit}>
+            {/* Order form */}
+            <div className='mx-auto' style={{display: 'flex', justifyContent: 'center', width: '50%'}}>
+            <Form className='mt-4' onSubmit={handleSubmit}>
                 <Form.Check 
                     type='switch'
                     id='useUserAddressSwitch'
-                    label='Uzyj swojego domyślnego adresu'
+                    label='Użyj swojego domyślnego adresu'
                     checked={useDefaultAddress}
                     onChange={handleSwitchChange}
                 />
@@ -189,73 +191,76 @@ export default function Cart() {
                 {!useDefaultAddress && <AddressForm />}
 
                 <Form.Group className='mb-3'>
-                <Form.Label>Wybierz metodę dostawy</Form.Label>
-                <div>
-                    <Form.Check
-                        inline
-                        type='radio'
-                        id='deliveryMethod1'
-                        label='Metoda 1'
-                        name='deliveryMethod'
-                        value={1}
-                    />
-                    <Form.Check
-                        inline
-                        type='radio'
-                        id='deliveryMethod2'
-                        label='Metoda 2'
-                        name='deliveryMethod'
-                        value={2}
-                    />
-                    <Form.Check
-                        inline
-                        type='radio'
-                        id='deliveryMethod3'
-                        label='Metoda 3'
-                        name='deliveryMethod'
-                        value={3}
-                    />
-                </div>
-            </Form.Group>
+                    <Form.Label>Wybierz metodę dostawy</Form.Label>
+                    <div>
+                        <Form.Check
+                            inline
+                            type='radio'
+                            id='deliveryMethod1'
+                            label='Metoda 1'
+                            name='deliveryMethod'
+                            value={1}
+                        />
+                        <Form.Check
+                            inline
+                            type='radio'
+                            id='deliveryMethod2'
+                            label='Metoda 2'
+                            name='deliveryMethod'
+                            value={2}
+                        />
+                        <Form.Check
+                            inline
+                            type='radio'
+                            id='deliveryMethod3'
+                            label='Metoda 3'
+                            name='deliveryMethod'
+                            value={3}
+                        />
+                    </div>
+                </Form.Group>
 
-            <Form.Group className='mb-3'>
-                <Form.Label>Wybierz metodę płatności</Form.Label>
-                <div>
-                    <Form.Check
-                        inline
-                        type='radio'
-                        id='paymentMethod1'
-                        label='Metoda 1'
-                        name='paymentMethod'
-                        value={1}
-                    />
-                    <Form.Check
-                        inline
-                        type='radio'
-                        id='paymentMethod2'
-                        label='Metoda 2'
-                        name='paymentMethod'
-                        value={2}
-                    />
-                    <Form.Check
-                        inline
-                        type='radio'
-                        id='paymentMethod3'
-                        label='Metoda 3'
-                        name='paymentMethod'
-                        value={3}
-                    />
-                </div>
-            </Form.Group>
-
+                <Form.Group className='mb-3'>
+                    <Form.Label>Wybierz metodę płatności</Form.Label>
+                    <div>
+                        <Form.Check
+                            inline
+                            type='radio'
+                            id='paymentMethod1'
+                            label='Metoda 1'
+                            name='paymentMethod'
+                            value={1}
+                        />
+                        <Form.Check
+                            inline
+                            type='radio'
+                            id='paymentMethod2'
+                            label='Metoda 2'
+                            name='paymentMethod'
+                            value={2}
+                        />
+                        <Form.Check
+                            inline
+                            type='radio'
+                            id='paymentMethod3'
+                            label='Metoda 3'
+                            name='paymentMethod'
+                            value={3}
+                        />
+                    </div>
+                </Form.Group>
 
                 <Form.Group className='mb-3'>
                     <Form.Label>Uwagi do zamówienia</Form.Label>
                     <Form.Control name='remarks' as='textarea' rows={3} placeholder='Dodaj uwagi...' />
                 </Form.Group>
-                <Button variant='success' type='submit'>Zamawiam</Button>
+                {formMsg && formMsg.length > 0 && <p className='mt-3 text-danger'>{
+                'Wystąpił błąd przy przetwarzaniu zamówienia. Sprawdź czy poprawnie wypełniłeś/aś cały formularz.'
+                }</p>}
+                <Button variant='success' type='submit' style={{marginBottom: '75px'}}>Zamawiam</Button>
             </Form>
-            {formMsg && formMsg.length > 0 && <p className='mt-3 text-danger' style={{marginLeft: '15px'}}>*Wystąpił błąd przy przetwarzaniu zamówienia. Upewnij się, ze wypełniłeś wszystkie pola w formularzu</p>}
-        </>
+            </div>
+            
+        </Container>
     );
 }
