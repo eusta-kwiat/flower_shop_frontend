@@ -108,7 +108,7 @@ export default function Cart() {
         const orderData = {
             ...(addressData && { address: addressData }), // Conditionally include address
             remarks: formData.get('remarks'),
-            discount_code: formData.get('discountCode'), // Assuming you have an input with name 'discountCode'
+            ...(inputPromoCode && inputPromoCode.length > 0 && { discount_code: inputPromoCode }),
             products: transformCartToOrder(cart), // Assuming you have the transformCart function defined
             payment_method: parseInt(formData.get('paymentMethod'), 10), // Assuming paymentMethod is an integer
         };
@@ -118,10 +118,12 @@ export default function Cart() {
         placeOrder(orderData)
             .then((res) => {
                 console.log(res.data);
+                localStorage.removeItem('cart');
+                router.push('/cart/success');
             })
             .catch((err) => {
-                console.log(err);
-                setFormMsg(err);
+                console.log('err', err);
+                setFormMsg(err.message);
             })
 
     };
@@ -253,7 +255,7 @@ export default function Cart() {
                 </Form.Group>
                 <Button variant='success' type='submit'>Zamawiam</Button>
             </Form>
-            {formMsg.length > 0 && <p>{formMsg}</p>}
+            {formMsg && formMsg.length > 0 && <p className='mt-3 text-danger' style={{marginLeft: '15px'}}>*Wystąpił błąd przy przetwarzaniu zamówienia. Upewnij się, ze wypełniłeś wszystkie pola w formularzu</p>}
         </>
     );
 }

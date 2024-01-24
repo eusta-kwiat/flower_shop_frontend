@@ -5,6 +5,7 @@ import { getOrderDetails } from '../../services/api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCreditCard, faMapMarkerAlt, faComment } from '@fortawesome/free-solid-svg-icons';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { format } from 'date-fns';
 
 export default function OrderDetails() {
   const params = useParams();
@@ -26,8 +27,12 @@ export default function OrderDetails() {
 
   const calculateTotalPrice = () => {
     return details?.order_products?.reduce((total, product) => {
-      return parseFloat(total + product.quantity * product.price).toFixed(2);
-    }, 0);
+      return parseFloat(total + product.quantity * product.price);
+    }, 0).toFixed(2);
+  };
+
+  const formatDate = (isoDate) => {
+    return isoDate ? format(new Date(isoDate), 'yyyy-MM-dd HH:mm:ss') : '';
   };
 
   return (
@@ -55,7 +60,7 @@ export default function OrderDetails() {
               <ul>
                 <li>{details?.payment?.paymentMethod?.name}</li>
                 <li>{details?.payment?.paymentStatus?.name}</li>
-                <li>{details?.payment?.paymentDate}</li>
+                <li>{formatDate(details?.payment?.paymentDate)}</li>
               </ul>
             </Card.Body>
           </Card>
