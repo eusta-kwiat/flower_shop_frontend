@@ -66,7 +66,7 @@ const ProductCard = ({ product }) => {
         </Card.Title>
       </Link>  
         <Card.Text>
-          Cena: {product.price}zł
+          Cena: {product.price && parseFloat(product.price).toFixed(2)}zł
         </Card.Text>
         <div>
           {isInCart ? (

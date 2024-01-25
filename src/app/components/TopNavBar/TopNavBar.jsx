@@ -35,6 +35,7 @@ const TopNavbar = () => {
         localStorage.removeItem('refresh');
         localStorage.setItem('isLoggedIn', 'false');
         setIsLoggedIn(false);
+        router.push('/');
     }
 
     const onCartClick = () => {
@@ -72,9 +73,9 @@ const TopNavbar = () => {
                     <FontAwesomeIcon icon={faSignInAlt} /> Zaloguj
                 </Nav.Link>
                 )}
-                <Nav.Link onClick={onProfileClick} style={{marginRight: '20px'}}>
+                {isLoggedIn && <Nav.Link onClick={onProfileClick} style={{marginRight: '20px'}}>
                 <FontAwesomeIcon icon={faUser} /> Profil
-                </Nav.Link>
+                </Nav.Link>}
                 {/* <Nav.Link onClick={onClear} style={{marginRight: '20px'}}>
                 Clear
                 </Nav.Link> */}
