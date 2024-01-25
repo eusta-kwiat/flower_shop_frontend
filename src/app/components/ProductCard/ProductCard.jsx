@@ -49,18 +49,22 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <Link href={`/products/${product.product_id}`} passHref>
+    
     <Card style={{ width: '15rem' , margin: '1rem'}} href={'/products/' + product.product_id}>
+      <Link href={`/products/${product.product_id}`} passHref>
       <Card.Img
         variant="top"
         src={product.img}
         alt={product.name}
         style={{ height: '250px', objectFit: 'cover' }}
       />
+      </Link>
       <Card.Body>
+      <Link href={`/products/${product.product_id}`} passHref>
         <Card.Title>
           <a href="/product_with_id" style={{textDecoration: 'none', color: 'black'}}>{product.name}</a>
         </Card.Title>
+      </Link>  
         <Card.Text>
           Cena: {product.price}zł
         </Card.Text>
@@ -81,7 +85,7 @@ const ProductCard = ({ product }) => {
 
       </Card.Body>
     </Card>
-    </Link>
+    
   );
 };
 
