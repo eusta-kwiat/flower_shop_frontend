@@ -152,14 +152,14 @@ export default function Cart() {
       return (
         <Container className="mt-5">
             <Row>
-                <Col xs={12} lg={8}>
+                <Col xs={12} lg={6}>
                     {cart.map(element => (
                         <ProductHorizontalCard key={element.product.id} product={element.product} onCartChange={setCart} />
                     ))}
                     <p className="mt-3">Cena całkowita: {totalPrice.toFixed(2)}zł</p>
                 </Col>
-                <Col xs={12} lg={4}>
-                    <Form style={{height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-end', paddingBottom: '100px'}}>
+                <Col xs={12} lg={6} style={{paddingLeft: '50px'}}>
+                    <Form style={{marginBottom: '25px'}}>
                         
                         <Form.Group className='mb-3' controlId='formPromoCode'>
                             <Form.Label>Wprowadź kod promocyjny</Form.Label>
@@ -174,12 +174,7 @@ export default function Cart() {
                         </Button>
                         {discountMsg && <p className={"mt-2 " + discountStyle}>{discountMsg}</p>}
                     </Form>
-                </Col>
-            </Row>
-
-            {/* Order form */}
-            <div className='mx-auto' style={{display: 'flex', justifyContent: 'center', width: '50%'}}>
-            <Form className='mt-4' onSubmit={handleSubmit}>
+                    <Form className='mt-4' onSubmit={handleSubmit}>
                 <Form.Check 
                     type='switch'
                     id='useUserAddressSwitch'
@@ -259,7 +254,11 @@ export default function Cart() {
                 }</p>}
                 <Button variant='success' type='submit' style={{marginBottom: '75px'}}>Zamawiam</Button>
             </Form>
-            </div>
+                </Col>
+            </Row>
+
+            {/* Order form */}
+            
             
         </Container>
     );

@@ -24,7 +24,7 @@ export default function Orders () {
 
     return (
         <div style={{margin: '25px'}}>
-            <Table striped bordered hover variant='dark' responsive size='md'>
+            <Table striped bordered hover responsive size='md'>
                 <thead>
                     <tr>
                         <th>Nr zamówienia</th>

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { getProducts } from '../../services/api';
 import ProductCard from '../ProductCard/ProductCard';
+import { Row, Col } from 'react-bootstrap';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -56,44 +57,67 @@ const ProductList = () => {
     setFilteredProducts(filteredResult);
   };
 
+  const clearFilters = () => {
+    setFilteredProducts(products);
+    setFilterParams({
+      minPrice: '',
+      maxPrice: '',
+      productName: '',
+    });
+  }
+
   return (
-    <>
-      <div>
-        <label>
-          Min Price:
-          <input
-            type="number"
-            name="minPrice"
-            value={filterParams.minPrice}
-            onChange={handleFilterChange}
-          />
-        </label>
-        <label>
-          Max Price:
-          <input
-            type="number"
-            name="maxPrice"
-            value={filterParams.maxPrice}
-            onChange={handleFilterChange}
-          />
-        </label>
-        <label>
-          Product Name:
-          <input
-            type="text"
-            name="productName"
-            value={filterParams.productName}
-            onChange={handleFilterChange}
-          />
-        </label>
-        <button onClick={applyFilters}>Apply Filters</button>
-      </div>
-      <div className='d-flex flex-wrap'>
-        {filteredProducts.map((product) => (
-          <ProductCard key={product.product_id} product={product} />
+    <Row>
+      <Col xs={12} sm={12} md={2} lg={2} style={{ position: 'sticky', top: '50px', margin: '50px 20px' }}>
+        <div className="p-4 rounded" style={{position: 'sticky', top: '50px', backgroundColor: '#B1B7D1'}}>
+          <h4>Filtry</h4>
+          <div className="mb-3">
+            <label className="form-label">Cena minimalna:</label>
+            <input
+              type="number"
+              className="form-control"
+              name="minPrice"
+              value={filterParams.minPrice}
+              onChange={handleFilterChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Cena maksymalna:</label>
+            <input
+              type="number"
+              className="form-control"
+              name="maxPrice"
+              value={filterParams.maxPrice}
+              onChange={handleFilterChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Nazwa produktu:</label>
+            <input
+              type="text"
+              className="form-control"
+              name="productName"
+              value={filterParams.productName}
+              onChange={handleFilterChange}
+            />
+          </div>
+          <button className="btn btn-primary" onClick={applyFilters}>
+            Zastosuj
+          </button>
+          <button className="btn btn-danger" onClick={clearFilters} style={{marginTop: '10px'}}>
+            Wyczyść
+          </button>
+        </div>
+        </Col>
+      <Row style={{width: '75%', marginRight: '15px'}}>
+        {filteredProducts.map((product, index) => (
+          <Col key={product.product_id} xs={12} sm={6} md={4} lg={3}>
+            <ProductCard product={product} />
+          </Col>
         ))}
-      </div>
-    </>
+      </Row>
+      
+    </Row>
   );
 };
 

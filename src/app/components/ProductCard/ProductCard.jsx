@@ -60,7 +60,7 @@ const ProductCard = ({ product }) => {
       />
       </Link>
       <Card.Body>
-      <Link href={`/products/${product.product_id}`} passHref>
+      <Link href={`/products/${product.product_id}`} passHref style={{textDecoration: 'none'}}>
         <Card.Title>
           <a href="/product_with_id" style={{textDecoration: 'none', color: 'black'}}>{product.name}</a>
         </Card.Title>

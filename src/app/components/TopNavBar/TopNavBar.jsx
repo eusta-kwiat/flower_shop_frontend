@@ -5,6 +5,8 @@ import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingBasket, faUser, faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 const TopNavbar = () => {
     const router = useRouter();
@@ -48,30 +50,34 @@ const TopNavbar = () => {
     }
 
     return (
-        <Navbar bg="dark" variant="dark">
+        <Navbar style={{backgroundColor: '#B1B7D1'}}>
             <NavbarBrand href='/' style={{ marginLeft: '10px' }}>Eustakwiat</NavbarBrand>
             <Nav className="ml-auto">
-                <NavLink href="/">Home</NavLink>
-                <NavLink href="/">Products</NavLink>
-                <NavLink href="/about">About</NavLink>
-                <NavLink href="/contact">Contact</NavLink>
+                <NavLink href="/">Produkty</NavLink>
+                <NavLink href="/promo">Rabaty</NavLink>
+                <NavLink href="/about">Kontakt</NavLink>
             </Nav>
             <div style={{ display: 'flex', flexDirection: 'row-reverse', width: '100%' }}>
-                <Button variant='info' style={{ width: '100px', marginRight: '15px' }} onClick={onCartClick}>Kosz</Button>
+                <Nav.Link onClick={onCartClick} style={{marginRight: '20px'}}>
+                <FontAwesomeIcon icon={faShoppingBasket} /> Kosz
+                </Nav.Link>
                 {isLoading ? (
-                    <></>
-                    ) : isLoggedIn ? (
-                    <Button variant="danger" style={{ width: '100px', marginRight: '15px' }} onClick={onLogout}>
-                        Wyloguj
-                    </Button>
-                    ) : (
-                    <Button variant="success" style={{ width: '100px', marginRight: '15px' }} onClick={handleLoginClick}>
-                        Zaloguj
-                    </Button>
+                <></>
+                ) : isLoggedIn ? (
+                <Nav.Link onClick={onLogout} style={{marginRight: '20px'}}>
+                    <FontAwesomeIcon icon={faSignOutAlt} /> Wyloguj
+                </Nav.Link>
+                ) : (
+                <Nav.Link onClick={handleLoginClick} style={{marginRight: '20px'}}>
+                    <FontAwesomeIcon icon={faSignInAlt} /> Zaloguj
+                </Nav.Link>
                 )}
-                <Button variant='success' style={{ width: '100px', marginRight: '15px' }} onClick={onProfileClick}>Profil</Button>
-                <Button variant='info' style={{ width: '100px', marginRight: '15px' }} onClick={onClear}>Clear</Button>
-
+                <Nav.Link onClick={onProfileClick} style={{marginRight: '20px'}}>
+                <FontAwesomeIcon icon={faUser} /> Profil
+                </Nav.Link>
+                {/* <Nav.Link onClick={onClear} style={{marginRight: '20px'}}>
+                Clear
+                </Nav.Link> */}
             </div>
         </Navbar>
     );
