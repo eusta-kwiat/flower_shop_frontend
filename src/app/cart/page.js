@@ -186,43 +186,13 @@ export default function Cart() {
                 {!useDefaultAddress && <AddressForm />}
 
                 <Form.Group className='mb-3'>
-                    <Form.Label>Wybierz metodę dostawy</Form.Label>
-                    <div>
-                        <Form.Check
-                            inline
-                            type='radio'
-                            id='deliveryMethod1'
-                            label='Metoda 1'
-                            name='deliveryMethod'
-                            value={1}
-                        />
-                        <Form.Check
-                            inline
-                            type='radio'
-                            id='deliveryMethod2'
-                            label='Metoda 2'
-                            name='deliveryMethod'
-                            value={2}
-                        />
-                        <Form.Check
-                            inline
-                            type='radio'
-                            id='deliveryMethod3'
-                            label='Metoda 3'
-                            name='deliveryMethod'
-                            value={3}
-                        />
-                    </div>
-                </Form.Group>
-
-                <Form.Group className='mb-3'>
                     <Form.Label>Wybierz metodę płatności</Form.Label>
                     <div>
                         <Form.Check
                             inline
                             type='radio'
                             id='paymentMethod1'
-                            label='Metoda 1'
+                            label='Przelew'
                             name='paymentMethod'
                             value={1}
                         />
@@ -230,7 +200,7 @@ export default function Cart() {
                             inline
                             type='radio'
                             id='paymentMethod2'
-                            label='Metoda 2'
+                            label='Karta płatnicza'
                             name='paymentMethod'
                             value={2}
                         />
@@ -238,7 +208,7 @@ export default function Cart() {
                             inline
                             type='radio'
                             id='paymentMethod3'
-                            label='Metoda 3'
+                            label='BLIK'
                             name='paymentMethod'
                             value={3}
                         />
