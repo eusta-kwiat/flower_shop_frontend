@@ -116,6 +116,8 @@ export default function OrderDetails() {
                 ))}
               </ul>
               {details && <p className="mt-3">Suma zamówienia: {details.cost} zł</p>}
+              {details && details.discount && 
+              <p className='mt-3 text-success'>Zastosowano kod rabatowy:<br/> {details.discount.name} {details.discount.percentage}%</p>}
             </Card.Body>
           </Card>
           <Button variant='danger' onClick={onCancelClick} style={{marginTop: '10px'}}>Anuluj zamówienie</Button>
