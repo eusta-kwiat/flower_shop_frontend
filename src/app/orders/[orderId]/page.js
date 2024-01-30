@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from 'react';
-import { usePathname, useSearchParams, useParams } from 'next/navigation';
-import { getOrderDetails } from '../../services/api';
+import { usePathname, useSearchParams, useParams, useRouter } from 'next/navigation';
+import { getOrderDetails, cancelOrder } from '../../services/api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCreditCard, faMapMarkerAlt, faComment } from '@fortawesome/free-solid-svg-icons';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
@@ -11,6 +11,8 @@ export default function OrderDetails() {
   const params = useParams();
   const orderId = params.orderId;
   const [details, setDetails] = useState(null);
+  const [cancelMsg, setCancelMsg] = useState('');
+  const router = useRouter();
 
   useEffect(() => {
     getOrderDetails(orderId)
@@ -21,8 +23,15 @@ export default function OrderDetails() {
       .catch((err) => { console.log(err) })
   }, []);
 
-  const onComplaintClick = () => {
-    // TODO
+  const onCancelClick = () => {
+    cancelOrder(orderId)
+      .then((res) => {
+        // setCancelMsg('Zamówienie zostało anulowane');
+        router.push('/order-cancel-success');
+      })
+      .catch((err) => {
+        setCancelMsg('Zamówienia nie można anulować');
+      })
   }
 
   const calculateTotalPrice = () => {
@@ -36,7 +45,7 @@ export default function OrderDetails() {
   };
 
   return (
-    <Container>
+    <Container style={{marginTop: '3vh'}}>
       <h1>Zamówienie nr {orderId}</h1>
       <Row className="align-items-stretch">
         {/* Client Info */}
@@ -109,7 +118,8 @@ export default function OrderDetails() {
               <p className="mt-3">Suma zamówienia: {calculateTotalPrice()} zł</p>
             </Card.Body>
           </Card>
-          <Button variant='danger' onClick={onComplaintClick} style={{marginTop: '10px'}}>Reklamacja</Button>
+          <Button variant='danger' onClick={onCancelClick} style={{marginTop: '10px'}}>Anuluj zamówienie</Button>
+          {cancelMsg && <p style={{ marginTop: '10px' }} className='text-danger'>{cancelMsg}</p>}
         </Col>
       </Row>
     </Container>

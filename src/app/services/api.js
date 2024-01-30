@@ -104,3 +104,9 @@ export const placeOrder = (body) => {
 
     return axios.post(apiURL + 'place_order/', body, {headers});
 };
+
+export const cancelOrder = (orderId) => {
+    const headers = getHeaders();
+
+    return axios.post(apiURL + 'cancel-order/', {'order': orderId}, {headers});
+}

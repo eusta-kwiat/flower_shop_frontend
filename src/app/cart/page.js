@@ -211,6 +211,7 @@ export default function Cart() {
                             label='BLIK'
                             name='paymentMethod'
                             value={3}
+                            variant='primary'
                         />
                     </div>
                 </Form.Group>
