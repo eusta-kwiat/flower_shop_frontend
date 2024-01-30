@@ -103,8 +103,11 @@ export default function Cart() {
     
         if (!useDefaultAddress) {
             addressData = {
-                description: formData.get('inputCity'), // Modify this based on your actual address structure
-                // Include other address properties like province, street, etc.
+                province: formData.get('inputProvince'),
+                city: formData.get('inputCity'),
+                street: formData.get('inputStreet'),
+                apartmentNumber: formData.get('inputApartNumber'),
+                postalCode: formData.get('inputPostalCode')
             };
         }
     
