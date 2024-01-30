@@ -115,7 +115,7 @@ export default function OrderDetails() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-3">Suma zamówienia: {details.cost} zł</p>
+              {details && <p className="mt-3">Suma zamówienia: {details.cost} zł</p>}
             </Card.Body>
           </Card>
           <Button variant='danger' onClick={onCancelClick} style={{marginTop: '10px'}}>Anuluj zamówienie</Button>
