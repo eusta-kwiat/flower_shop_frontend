@@ -152,13 +152,13 @@ export default function Cart() {
       return (
         <Container className="mt-5">
             <Row>
-                <Col xs={12} lg={6}>
+                <Col xs={12} lg={8}>
                     {cart.map(element => (
                         <ProductHorizontalCard key={element.product.id} product={element.product} onCartChange={setCart} />
                     ))}
                     <p className="mt-3">Cena całkowita: {totalPrice.toFixed(2)}zł</p>
                 </Col>
-                <Col xs={12} lg={6} style={{paddingLeft: '50px'}}>
+                <Col xs={12} lg={4} style={{paddingLeft: '50px'}}>
                     <Form style={{marginBottom: '25px'}}>
                         
                         <Form.Group className='mb-3' controlId='formPromoCode'>
