@@ -59,10 +59,12 @@ export default function Cart() {
     const [useDefaultAddress, setUseDefaultAddress] = useState(false);
     const [formMsg, setFormMsg] = useState("");
     const [discountStyle, setDiscountStyle] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
         const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
         setCart(storedCart);
+        setIsLoggedIn(localStorage.getItem('isLoggedIn') === true);
     }, []);
 
     useEffect(() => {
@@ -226,7 +228,9 @@ export default function Cart() {
                 {formMsg && formMsg.length > 0 && <p className='mt-3 text-danger'>{
                 'Wystąpił błąd przy przetwarzaniu zamówienia. Sprawdź czy poprawnie wypełniłeś/aś cały formularz.'
                 }</p>}
-                <Button variant='success' type='submit' style={{marginBottom: '75px'}}>Zamawiam</Button>
+                { isLoggedIn ? 
+                    <Button variant='success' type='submit' style={{marginBottom: '75px'}}>Zamawiam</Button> :
+                    <p className='mt-3 text-secondary'>Zaloguj się w celu złożenia zamówienia</p>}
             </Form>
                 </Col>
             </Row>
