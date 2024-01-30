@@ -1,4 +1,5 @@
 import axios from 'axios';
+// import "../../../public/flower_images/"
 
 const apiURL = 'http://127.0.0.1:8000/api/';
 
@@ -46,8 +47,10 @@ export const getProducts = async () => {
         const apiProducts = response.data;
         const productsWithImg = apiProducts.map((product, index) => ({
             ...product,
-            img: `https://picsum.photos/200/250?random=${index + 1}`,
+            img: `/flower_images/${index+1}.jpg`
+            // img: `https://picsum.photos/200/250?random=${index + 1}`,
         }));
+        console.log(productsWithImg[0].img);
 
         return productsWithImg;
     } catch (error) {

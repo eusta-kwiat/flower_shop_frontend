@@ -13,7 +13,7 @@ const ProductDescriptionPage = () => {
         name: '',
         description: '',
         price: 0,
-        img: 'https://picsum.photos/600/200',
+        img: '',
         discount: {},
     });
     const [isInCart, setIsInCart] = useState(false);
@@ -38,7 +38,7 @@ const ProductDescriptionPage = () => {
         getProductById(productId)
             .then((res) => {
                 const foundProduct = res.data.filter(prod => prod.product_id === productId)[0];
-                foundProduct.img = `https://picsum.photos/800/250`;
+                foundProduct.img = `/flower_images/${productId}.jpg`;
                 setProduct(foundProduct);
                 console.log(foundProduct);
             })
@@ -83,7 +83,7 @@ const ProductDescriptionPage = () => {
         <Col md={8}>
           <Card>
             <Card.Body>
-              <Image src={img} alt={name} className='mx-auto d-block' />
+              <Image src={img} alt={name} className='mx-auto d-block' style={{width: '200px', height: '200px'}} />
               <h2 className="mt-3">{name}</h2>
               <p>{description}</p>
               <div className="d-flex justify-content-between align-items-center mb-6">
