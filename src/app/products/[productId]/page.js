@@ -90,7 +90,10 @@ const ProductDescriptionPage = () => {
                 <h4>
                   {price && parseFloat(price).toFixed(2)}zł
                 </h4>
-                {hasDiscount && <span className='text-success'>Dostępna promocja: {firstDiscount.percentage}%</span>}
+                <div>
+                {hasDiscount && <p className='text-success'>Dostępna promocja: {firstDiscount.percentage}%</p>}
+                {hasDiscount && <p className='text-success'>Kod {firstDiscount.code} za {firstDiscount.pointsCost} pyłków</p>}
+                </div>
               </div>
               {isInCart ? (<Row>
                     <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>

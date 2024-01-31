@@ -17,31 +17,31 @@ const AddressForm = () => {
             <Form.Label htmlFor="inputCity">Miasto</Form.Label>
             <Form.Control
                 id="inputCity"
-                name="inputCity" // Add name attribute
+                name="inputCity"
             />
 
             <Form.Label htmlFor="inputProvince">Województwo</Form.Label>
             <Form.Control
                 id="inputProvince"
-                name="inputProvince" // Add name attribute
+                name="inputProvince"
             />
 
             <Form.Label htmlFor="inputStreet">Ulica</Form.Label>
             <Form.Control
                 id="inputStreet"
-                name="inputStreet" // Add name attribute
+                name="inputStreet"
             />
 
             <Form.Label htmlFor="inputApartNumber">Nr lokalu</Form.Label>
             <Form.Control
                 id="inputApartNumber"
-                name="inputApartNumber" // Add name attribute
+                name="inputApartNumber"
             />
 
             <Form.Label htmlFor="inputPostalCode">Kod pocztowy</Form.Label>
             <Form.Control
                 id="inputPostalCode"
-                name="inputPostalCode" // Add name attribute
+                name="inputPostalCode"
             />
         </>
     );
@@ -114,11 +114,11 @@ export default function Cart() {
         }
     
         const orderData = {
-            ...(addressData && { address: addressData }), // Conditionally include address
+            ...(addressData && { address: addressData }),
             remarks: formData.get('remarks'),
             ...(inputPromoCode && inputPromoCode.length > 0 && { discount_code: inputPromoCode }),
-            products: transformCartToOrder(cart), // Assuming you have the transformCart function defined
-            payment_method: parseInt(formData.get('paymentMethod'), 10), // Assuming paymentMethod is an integer
+            products: transformCartToOrder(cart),
+            payment_method: parseInt(formData.get('paymentMethod'), 10),
         };
     
         console.log(orderData);
@@ -228,7 +228,7 @@ export default function Cart() {
                 {formMsg && formMsg.length > 0 && <p className='mt-3 text-danger'>{
                 'Wystąpił błąd przy przetwarzaniu zamówienia. Sprawdź czy poprawnie wypełniłeś/aś cały formularz.'
                 }</p>}
-                { isLoggedIn ? 
+                { localStorage.getItem('isLoggedIn') === 'true' ? 
                     <Button variant='success' type='submit' style={{marginBottom: '75px'}}>Zamawiam</Button> :
                     <p className='mt-3 text-secondary'>Zaloguj się w celu złożenia zamówienia</p>}
             </Form>
